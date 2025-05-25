@@ -1,0 +1,1 @@
+Parabens! Seu Fetch está funcionando, agora vamos testar o promisses!

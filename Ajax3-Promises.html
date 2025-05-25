@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX3 COM PROMISES</title>
+</head>
+<body>
+    <h1>AJAX3 COM PROMISES</h1>
+   
+    <div id="resultado"></div><br>
+    <button id="refazer"> Refazer Operação</button><br><br>
+
+    <script>
+        const resultadoDiv = document.getElementById('resultado');
+        const refazer = document.getElementById('refazer');
+
+         function minhaOperacaoAssincrona() {
+            return new Promise((resolve, reject) => {
+                resultadoDiv.textContent = "Executando operação assíncrona...";
+                resultadoDiv.style.color = "black";
+                setTimeout(() => {
+                    const sucesso = Math.random() > 0.5;
+                    if (sucesso) {
+                        resolve("Operação concluída com sucesso!");
+                    } else {
+                        reject("Ocorreu um erro na operação.");
+                    }
+                }, 2000);
+            });
+        }
+
+        function executarOperacao() {
+            minhaOperacaoAssincrona()
+            .then(resultado => {
+                resultadoDiv.textContent = "Sucesso: " + resultado;
+            })
+            .catch(erro => {
+                resultadoDiv.textContent = "Erro: " + erro;
+                resultadoDiv.style.color = "red";
+            });
+
+        }
+      
+        executarOperacao();
+
+        refazer.addEventListener('click', executarOperacao);
+    
+    </script>
+</body>
+</html>
+

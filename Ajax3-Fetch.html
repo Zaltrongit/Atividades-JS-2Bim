@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX com Fetch</title>
+    <style>
+        #conteudo {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1> AJAX3 COM FETCH</h1>
+    <button id="carregar">CLIQUE AQUI!</button>
+
+    <div id="conteudo"></div>
+
+    <script>
+        document.getElementById('carregar').addEventListener('click', () => {
+          fetch('dadosFetch.txt')
+              .then(response => { //requisição Get 
+                if (!response.ok) {
+                  throw new Error('Erro na requisição');
+                }
+                return response.text();
+            })
+            .then(data => { //inserindo o texto na div 
+                document.getElementById('conteudo').innerHTML = data;
+            })
+            .catch(error => { //se ocorrer um erro, mostra essa mensagem, e o erro original
+                document.getElementById('conteudo').innerHTML = 'Erro ao carregar conteudo: ' + error.message;
+            });
+        });
+    </script>
+</body>
+</html>

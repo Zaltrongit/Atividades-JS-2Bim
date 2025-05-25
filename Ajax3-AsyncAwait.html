@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX3 COM ASYNC/AWAIT</title>
+</head>
+<body>
+    <h1>AJAX3 COM ASYNC/AWAIT</h1>
+
+    <div id="resultado1"></div>
+    <div id="resultado2"></div>
+
+    <script>
+        const resultadoDiv1 = document.getElementById('resultado1');
+        const resultadoDiv2 = document.getElementById('resultado2');
+
+        function resolverDepoisDe2Segundos(x) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve(x);
+                }, 2000);
+            });
+        }
+
+        async function adicionar1(x) {
+            var a = resolverDepoisDe2Segundos(20);
+            var b = resolverDepoisDe2Segundos(30);
+            const resultado = x + (await a) + (await b);
+            resultadoDiv1.textContent = `Resultado 1:  ${resultado}`;
+        }
+
+        adicionar1(10);
+
+        async function adicionar2(x) {
+            var a = await resolverDepoisDe2Segundos(30);
+            var b = await resolverDepoisDe2Segundos(60);
+            const resultado = x + a + b;
+            resultadoDiv2.textContent = `Resultado 2:  ${resultado}`;
+        }
+
+        adicionar2(30);
+    </script>
+</body>
+</html>
+
+
